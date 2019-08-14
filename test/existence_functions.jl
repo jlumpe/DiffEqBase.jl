@@ -1,10 +1,12 @@
 using Test, DiffEqBase
-using DiffEqBase: __has_jac, __has_tgrad, __has_Wfact, __has_Wfact_t,
-  __has_paramjac, __has_syms, __has_analytic, __has_colorvec,  has_jac, has_tgrad,
-  has_Wfact, has_Wfact_t, has_paramjac, has_syms, has_analytic, has_colorvec,
-  AbstractDiffEqFunction
+using DiffEqBase: __has_mass_matrix, __has_jac, __has_tgrad, __has_Wfact,
+  __has_Wfact_t, __has_paramjac, __has_syms, __has_analytic, __has_colorvec
+using DiffEqBase: has_mass_matrix, has_jac, has_tgrad, has_Wfact, has_Wfact_t,
+  has_paramjac, has_syms, has_analytic, has_colorvec,
+using DiffEqBase: AbstractDiffEqFunction
 
 struct Foo <: AbstractDiffEqFunction{false}
+  mass_matrix
   jac
   tgrad
   Wfact
@@ -15,8 +17,9 @@ struct Foo <: AbstractDiffEqFunction{false}
   colorvec
 end
 
-f = Foo(1,1,1,1,1,1,1,1)
+f = Foo(1,1,1,1,1,1,1,1,1)
 
+@test __has_mass_matrix(f)
 @test __has_jac(f)
 @test __has_tgrad(f)
 @test __has_Wfact(f)
@@ -26,6 +29,7 @@ f = Foo(1,1,1,1,1,1,1,1)
 @test __has_analytic(f)
 @test __has_colorvec(f)
 
+@test has_mass_matrix(f)
 @test has_jac(f)
 @test has_tgrad(f)
 @test has_Wfact(f)
@@ -37,14 +41,16 @@ f = Foo(1,1,1,1,1,1,1,1)
 
 
 struct Foo2 <: AbstractDiffEqFunction{false}
+  mass_matrix
   jac
   tgrad
   Wfact
   Wfact_t
 end
 
-f2 = Foo2(1,1,nothing,nothing)
+f2 = Foo2(1, 1,1,nothing,nothing)
 
+@test __has_mass_matrix(f)
 @test __has_jac(f2)
 @test __has_tgrad(f2)
 @test __has_Wfact(f2)
@@ -54,6 +60,7 @@ f2 = Foo2(1,1,nothing,nothing)
 @test !__has_analytic(f2)
 @test !__has_colorvec(f2)
 
+@test has_mass_matrix(f)
 @test has_jac(f2)
 @test has_tgrad(f2)
 @test !has_Wfact(f2)

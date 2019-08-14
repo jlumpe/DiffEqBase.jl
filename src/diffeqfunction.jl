@@ -751,6 +751,7 @@ DDEFunction(f::DDEFunction; kwargs...) = f
 ########## Existance Functions
 
 # Check that field/property exists (may be nothing)
+__has_mass_matrix(f) = isdefined(f, :mass_matrix)
 __has_jac(f) = isdefined(f, :jac)
 __has_tgrad(f) = isdefined(f, :tgrad)
 __has_Wfact(f) = isdefined(f, :Wfact)
@@ -761,6 +762,7 @@ __has_analytic(f) = isdefined(f, :analytic)
 __has_colorvec(f) = isdefined(f, :colorvec)
 
 # compatibility
+has_mass_matrix(f::AbstractDiffEqFunction) = __has_mass_matrix(f) && f.mass_matrix != nothing
 has_invW(f::AbstractDiffEqFunction) = false
 has_analytic(f::AbstractDiffEqFunction) = __has_analytic(f) && f.analytic != nothing
 has_jac(f::AbstractDiffEqFunction) = __has_jac(f) && f.jac != nothing
