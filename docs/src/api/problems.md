@@ -2,99 +2,30 @@
 
 
 TODO:
-* How do optional parameters (`p=nothing`) work?
+* How do optional parameters in problems (`p=nothing`) work?
 
-## Problem types
+
+## Base types
 
 ```@docs
 DiffEqBase.DEProblem
 ```
 
-### Discrete problems
+
+## Interface
 
 ```@docs
-DiffEqBase.AbstractDiscreteProblem
-DiscreteProblem
+remake
 ```
 
-### ODE problems
+## Other functions
 
 ```@docs
-DiffEqBase.AbstractODEProblem
-ODEProblem
-```
-
-#### Subtypes
-
-TODO: document `problem_type` field.
-
-```@docs
-DiffEqBase.StandardODEProblem
-DiffEqBase.AbstractDynamicalODEProblem
-DynamicalODEProblem
-SecondOrderODEProblem
-DiffEqBase.AbstractSplitODEProblem
-SplitODEProblem
-```
-
-### Steady state problems
-
-```@docs
-DiffEqBase.AbstractSteadyStateProblem
-SteadyStateProblem
-```
-
-### Boundary value problems
-
-```@docs
-DiffEqBase.AbstractBVProblem
-DiffEqBase.StandardBVProblem
-BVProblem
-TwoPointBVProblem
-```
-
-### SDE problems
-
-```@docs
-DiffEqBase.AbstractSDEProblem
-DiffEqBase.StandardSDEProblem
-SDEProblem
-DiffEqBase.AbstractSplitSDEProblem
-SplitSDEProblem
-```
-
-### RODE problems
-
-```@docs
-DiffEqBase.AbstractRODEProblem
-RODEProblem
-```
-
-### DDE problems
-
-```@docs
-DiffEqBase.AbstractDDEProblem
-DDEProblem
-```
-
-### DAE problems
-
-```@docs
-DiffEqBase.AbstractDAEProblem
-DAEProblem
-```
-
-### Jump problems
-
-```@docs
-DiffEqBase.AbstractJumpProblem
-```
-
-
-## Utilities
-
-```@docs
-isinplace
-DiffEqBase.is_diagonal_noise
+DiffEqBase.get_concrete_problem
+DiffEqBase.get_concrete_u0
+DiffEqBase.get_concrete_tspan
 DiffEqBase.promote_tspan
+DiffEqBase.eval_u0
+DiffEqBase.adaptive_warn
+DiffEqBase.adaptive_integer_warn
 ```
